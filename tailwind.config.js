@@ -7,11 +7,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      animation: {
+        "spin-slow": "spin 12s linear infinite",
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#FFFFFF", // Teal Blue
+        secondary: "#D3D3D3", // Light Gray
+        accent: "#FFA500", // Orange
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
