@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 const ColorPalettePage = () => {
   const [hoverColor, setHoverColor] = useState(null);
+  const [showTooltip, setShowTooltip] = useState(false);
   const handleMouseOver = (colorCode) => {
     setHoverColor(colorCode);
   };
@@ -16,15 +17,13 @@ const ColorPalettePage = () => {
   const handleClick = async (color) => {
     try {
       await navigator.clipboard.writeText(color);
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: `Copy this color hexcode ${color}`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      setShowTooltip(true);
+      // Hide the tooltip after 1.5 seconds
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 1500);
     } catch (err) {
-      console.error("Failed to copy: ", err);
+      console.error("Failed to copy:", err);
     }
   };
 
@@ -32,6 +31,7 @@ const ColorPalettePage = () => {
     <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 my-8">
       {colors?.map((colored) => (
         <div key={colored?.narmal}>
+          {/* Normal Color porpuse Use this div */}
           <div
             className="cursor-pointer h-16 rounded-t-lg relative"
             style={{ backgroundColor: colored?.narmal }}
@@ -46,7 +46,14 @@ const ColorPalettePage = () => {
                 {colored?.narmal}
               </span>
             )}
+            {showTooltip && hoverColor === colored?.narmal && (
+              <div className="absolute text-sm top-0 left-1/2 transform -translate-x-1/2 mt-2 px-2 py-0.5 text-white bg-gray-800 rounded">
+                Copied !
+              </div>
+            )}
           </div>
+
+          {/* Medium Color porpuse Use this div */}
           <div
             className="cursor-pointer h-16 relative"
             style={{ backgroundColor: colored?.medium }}
@@ -61,8 +68,15 @@ const ColorPalettePage = () => {
                 {colored?.medium}
               </span>
             )}
+
+            {showTooltip && hoverColor === colored?.medium && (
+              <div className="absolute text-sm top-0 left-1/2 transform -translate-x-1/2 mt-2 px-2 py-0.5 text-white bg-gray-800 rounded">
+                Copied !
+              </div>
+            )}
           </div>
 
+          {/* SemiColor porpuse Use this div */}
           <div
             className="cursor-pointer h-16 relative"
             style={{ backgroundColor: colored?.semiColor }}
@@ -77,7 +91,15 @@ const ColorPalettePage = () => {
                 {colored?.semiColor}
               </span>
             )}
+
+            {showTooltip && hoverColor === colored?.semiColor && (
+              <div className="absolute text-sm top-0 left-1/2 transform -translate-x-1/2 mt-2 px-2 py-0.5 text-white bg-gray-800 rounded">
+                Copied !
+              </div>
+            )}
           </div>
+
+          {/* boldColor porpuse Use this div */}
           <div
             className="cursor-pointer h-16 rounded-b-lg relative"
             style={{ backgroundColor: colored?.boldColor }}
@@ -91,6 +113,11 @@ const ColorPalettePage = () => {
               >
                 {colored?.boldColor}
               </span>
+            )}
+            {showTooltip && hoverColor === colored?.boldColor && (
+              <div className="absolute text-sm top-0 left-1/2 transform -translate-x-1/2 mt-2 px-2 py-0.5 text-white bg-gray-800 rounded">
+                Copied !
+              </div>
             )}
           </div>
         </div>
@@ -153,6 +180,30 @@ const colors = [
     medium: "#525252",
     semiColor: "#262626",
     boldColor: "#0a0a0a",
+  },
+  {
+    narmal: "#fb923c",
+    medium: "#ea580c",
+    semiColor: "#9a3412",
+    boldColor: "#431407",
+  },
+  {
+    narmal: "#60a5fa",
+    medium: "#2563eb",
+    semiColor: "#3730a3",
+    boldColor: "#1e1b4b",
+  },
+  {
+    narmal: "#94a3b8",
+    medium: "#475569",
+    semiColor: "#1e293b",
+    boldColor: "#020617",
+  },
+  {
+    narmal: "#fde047",
+    medium: "#eab308",
+    semiColor: "#854d0e",
+    boldColor: "#422006",
   },
 ];
 

@@ -32,6 +32,13 @@ const ToolsGenaretor = () => {
       link: "/signIn_generator",
       buttonText: "Create Login Forms",
     },
+    {
+      title: "Table Form Generator",
+      description: "Design sleek and secure login forms with various styles.",
+      image: "https://i.ibb.co.com/ZMfPHbh/tailwind-logo.png",
+      link: "/table_generator",
+      buttonText: "Create A Table",
+    },
   ];
   return (
     <div>
